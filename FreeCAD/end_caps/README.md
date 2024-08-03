@@ -15,8 +15,11 @@ Note that 0.2 mm for tolerance almost works but leads to very stiff screwing.
 ## M90 Collimation Cap
 
 It is just an end cap with an M90x1 thread that can be screwed in place of the focuser on a GSO RC8.
-The collimation cap has a pinhole (parametrized to 1.5 mi). It is recommended to print it in white to save the effort of
+The collimation cap has a pinhole (parametrized to 2.5 mi). It is recommended to print it in white to save the effort of
 painting the inside in white later.
+
+Note that with a pinhole of 1.5 mm, with the inaccuracies of 3D printing, there is no actual hole, only a faint mark
+where the hole should be.
 
 This is used to make sure that the axis of the secondary goes through the center of the primary. This is achieved when
 the reflection of the pinhole is exactly in the center of the secondary (assuming there is a marker correctly placed in
