@@ -30,3 +30,13 @@ Using the usual stepper motor 28BYJ-48. The important dimensions are:
 - Shaft is 8 mm ahead of the attachment holes
 - Main body: 19mm high, 28 mm diameter
 - Connector creates a rectangulat protrusion at the back (adds 3 mm, 14.6 mm wide)
+
+## Base
+
+### Motor attachment
+
+Plan 2 mm for gear pressure adjustment.
+
+### Assembly holes
+
+Plan for threaded inserts in the case (external diameter 4.5 for M3).
