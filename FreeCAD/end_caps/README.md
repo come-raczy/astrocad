@@ -38,3 +38,7 @@ tilting adapter is required (e.g. TS-Optics M90 Tilting Adapter Flange for astro
 it is useful to know if there is a tilt in the axis of the focuser, as this is an important factor to decide to
 purchase a tilting adapter. A few millimeters in the focus plane is not very significant. More than 15% of the sensor
 diagonal might cause vignetting and distortion in a corner.
+
+## Collimation caps with lens ports
+
+Same as above, but with a port to hold a lens with a diameter of 36.5 mm.
