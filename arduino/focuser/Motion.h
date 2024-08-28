@@ -13,19 +13,24 @@
 //  maximum rotation of 9/10 of a turn.
 // The total number of steps is : 2048 * 56 * 9 / 18 / 10 ~= 5734
 
-const unsigned long BASE_STEPS = 32;
+const unsigned long BASE_STEPS = 64;
 const unsigned long GEARBOX = 64;
 const unsigned long PINION_TEETH = 18;
 const unsigned long GEAR_TEETH = 56;
 const float MAX_ROTATION = 9.0 / 10.0;
 
+const unsigned int DEFAULT_RPM = 5; // 1 vibrates, 8 spins
 class Motion {
 public:
-  Motion(const unsigned int inPins[4])
-    : inPins_{ inPins } {}
+  Motion(const unsigned int inPins[4]) {
+      for (int i=0; i< 4; ++i) {
+        inPins_[i] = inPins[i];
+      }
+      rpm(DEFAULT_RPM);
+    }
   // number of steps for 1 full revolution of the focuser ring
   static unsigned long stepsPerRev() {
-    return double(BASE_STEPS * GEARBOX * GEAR_TEETH) / double(GEAR_TEETH);
+    return double(BASE_STEPS) * double(GEARBOX) * double(GEAR_TEETH) / double(PINION_TEETH);
   }
   // total number of steps for the full range of motion of the focuser ring
   static const unsigned long maxSteps() {
@@ -39,6 +44,7 @@ public:
   void initialize() {
     for (auto p : inPins_) {
       pinMode(p, OUTPUT);
+      digitalWrite(p, LOW);
     }
     // TODO read position from EEPROM
     position_ = 0;
@@ -112,18 +118,18 @@ public:
     unsigned pinLevels = pinLevels_[position_ % 8];
     for (unsigned int i = 0; i < 4; ++i) {
       digitalWrite(inPins_[i], pinLevels & 1);
-      pinLevels >> 1;
+      pinLevels = (pinLevels )>> 1;
     }
     if (position_ == destination_) {
       stop();
     }
   }
 protected:
-  const unsigned int inPins_[4];
+  unsigned int inPins_[4];
   unsigned int position_ = 0;
   unsigned int destination_ = 0;
   unsigned long lastStepTime_ = 0;
-  unsigned int rpm_;
+  unsigned int rpm_ = 1;
   unsigned long stepDuration_;
   const char pinLevels_[8] = { 0b1001, 0b1000, 0b1100, 0b0100, 0b0110, 0b0010, 0b0011, 0b0001 };
 };
