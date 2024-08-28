@@ -1,4 +1,5 @@
 #include <stdio.h>
+//#include <initializer_list>
 #include "Command.h"
 #include "Response.h"
 #include "Motion.h"
@@ -8,7 +9,8 @@ const String VERSION_STRING = "v0.0.1";
 
 
 // Mapping of motor controller pins to arduino pins
-const unsigned int IN_PINS[4] = { 8, 9, 10, 11 };
+const unsigned int IN_PINS[4] = { 7, 8, 9, 10 };
+
 
 Motion motion(IN_PINS);
 
@@ -23,6 +25,12 @@ void setup() {
   Serial.flush();
   motion.initialize();
   // TODO: manage position in EEPROM
+  int l[] = { 11, 12, 10, 9, 8, 7, 6, 5, 4, 3, 2 };
+  for (auto p : l) {
+    pinMode(p, OUTPUT);
+    digitalWrite(p, LOW);
+  }
+  digitalWrite(12, HIGH);
 }
 
 ////////////////////////////////////////
@@ -131,7 +139,7 @@ Response getRpm() {
 }
 
 Response getStepDuration() {
-  return Response(ResponseCode::RPM, String(motion.stepDuration()));
+  return Response(ResponseCode::STEP_DURATION, String(motion.stepDuration()));
 }
 
 Response setRpm(const String &payload) {
