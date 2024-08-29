@@ -19,7 +19,7 @@ const unsigned long PINION_TEETH = 18;
 const unsigned long GEAR_TEETH = 56;
 const float MAX_ROTATION = 9.0 / 10.0;
 
-const unsigned int DEFAULT_RPM = 5; // 1 vibrates, 8 spins
+const unsigned int DEFAULT_RPM = 2; // 1 vibrates, 8 spins
 class Motion {
 public:
   Motion(const unsigned int inPins[4]) {
@@ -36,7 +36,6 @@ public:
   static const unsigned long maxSteps() {
     return stepsPerRev() * MAX_ROTATION;
   }
-  static const unsigned int DEFAULT_RPM = 3;
   // step duration in microseconds to reach rhe targeted default RPM
   static const unsigned long defaultStepDuration() {
     return 60 * 1000L * 1000L / maxSteps() / DEFAULT_RPM;
@@ -129,7 +128,7 @@ protected:
   unsigned int position_ = 0;
   unsigned int destination_ = 0;
   unsigned long lastStepTime_ = 0;
-  unsigned int rpm_ = 1;
+  unsigned int rpm_;
   unsigned long stepDuration_;
   const char pinLevels_[8] = { 0b1001, 0b1000, 0b1100, 0b0100, 0b0110, 0b0010, 0b0011, 0b0001 };
 };
